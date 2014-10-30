@@ -7,20 +7,23 @@ class Message
 	public $sender = 0;
 	public $place;
 	public $perimeter = 0;
-	public $content = 'tralala';
+	public $content;
 	public $creation;
-	
+	public $extraOptions;
+	public $timeToLive;
 
 	// déclaration des méthodes
 	
 	//Constructeur de la classe
-	public function __construct ($b,$perim, $mess, $time) {
+	public function __construct ($b,$perim, $mess, $time, $extraOptions, $ttl) {
 		$this->id = $b;
 		print "Création du message" . $this->id. "\n";
 		$place = new Place();
 		$this->perimeter = $perim;
 		$this->content = $mess;
 		$this->creation = new DateTime($time);
+		$this->extraOptions = $extraOptions;
+		$this->timeToLive = $ttl;
 	}
 	public function __construct ($b) {
 		$this->id = $b;
@@ -74,7 +77,17 @@ class Message
 	public function getContent() {
 		return $this->content;
 	}
-
-	
+	public function getExtraOptions(){
+		return $this->extraOptions;
+	}
+	public function setExtraOptions($a){
+		$this->extraOptions = $a;
+	}
+	public function setTimeToLive($a){
+		$this->timeToLive = $a;
+	}
+	public function getTimeToLive(){
+		return $this->timeToLive;
+	}
 }
 ?>
