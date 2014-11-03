@@ -1,4 +1,5 @@
 <?php
+use Miss\DAO\DAOFactory;
 class User
 {
 	// déclaration d'une propriété
@@ -10,11 +11,13 @@ class User
 	public $friendList;			// liste d'amis
 	public $friendRequestList;	// Liste de requête d'amis.
 	public $messageList;  		//Liste de message à renvoyer à l'utilisateur
-
+	
+	protected $userDao;
+	protected $dao;
 	// déclaration des méthodes
 	
 	//Constructeur de la classe
-	public function __construct ($b,$nom,$pass,$place,$broad,$endroit,$amiListe, $request, $messList) {
+	public function __construct ($b,$nom,$pass,$place,$broad,$endroit,$amiListe, $request, $messList, $da) {
 	 	$this->id=$b;
 	 	$this->name=$nom;
 	 	$this->pwd=$pass;
@@ -23,17 +26,21 @@ class User
 	 	$this->friendRequestList=$request;
 	 	$this->messageList=$messList;
 	 	$this->place=$place;
+	 	$this->userDao = $da->createUserDao();
 	}
-	public function  __construct(){
-		
+	public function  __construct($da){
+		$this->place = new Place();
+		$this->userDao = $da->createUserDao();
 	}
-	public function __construct($b,$nom,$pass,$place,$broad,$endroit,$amiListe){
+	public function __construct($b,$nom,$pass,$place,$broad,$amiListe, $da){
 		$this->id=$b;
 		$this->name=$nom;
 		$this->pwd=$pass;
 		$this->broadcast=$broad;
 		$this->friendList=$amiListe;
 		$this->place=$place;
+		$this->userDao = $da->createUserDao();
+		
 	}
 	
 	
@@ -44,15 +51,7 @@ class User
 	public function refreshFriendRequestList(){
 		
 	}
-	public function getUnicastMessages(){
-		
-	}
-	public function getAnycastMessages(){
-	
-	}
-	public function getBroadcastMessages(){
-	
-	}
+
 	public function deleteAccount(){
 		
 	}

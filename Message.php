@@ -11,11 +11,12 @@ class Message
 	public $creation;
 	public $extraOptions;
 	public $timeToLive;
+	protected $dao;
 
 	// déclaration des méthodes
 	
 	//Constructeur de la classe
-	public function __construct ($b,$perim, $mess, $time, $extraOptions, $ttl) {
+	public function __construct ($b,$perim, $mess, $time, $extraOptions, $ttl, $da) {
 		$this->id = $b;
 		print "Création du message" . $this->id. "\n";
 		$place = new Place();
@@ -24,9 +25,12 @@ class Message
 		$this->creation = new DateTime($time);
 		$this->extraOptions = $extraOptions;
 		$this->timeToLive = $ttl;
+		$this->dao = $da->createMessDao();
 	}
-	public function __construct ($b) {
+	public function __construct ($b,$da) {
 		$this->id = $b;
+		$this->dao = $da->createMessDao();
+		
 	}
 	//$obj = new Message();
 	

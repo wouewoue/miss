@@ -5,12 +5,14 @@ class Admin {
 	public $id;
 	public $name;
 	public $pwd;
+	protected $dao;
 	
 	// Constructeurs & destructeurs
-	public function __construct ($i,$nom,$pass) {
+	public function __construct ($i,$nom,$pass,$da) {
 		$this->id = $i;
 		$this->name = $nom;
 		$this->pwd = $pass;
+		$this->dao = $da->createAdminDao();
 	}
 	
 	/*  *********** Methods ***********  */
